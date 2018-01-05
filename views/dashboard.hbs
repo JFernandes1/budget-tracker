@@ -1,0 +1,391 @@
+
+ <div id="topNav">     
+        <a href='/logout' id = "logoutBtn"> Log Out</a>
+        <br>
+        <a id = "tour" href="javascript:void(0);" onclick="javascript:introJs().start();">tour</a>
+</div>
+        
+<body>
+<div class="jumbotron">
+        <h1 data-step="1" data-intro="welcome to your budget tracker - a friend and foe when it comes to keeping your spending in check">budget tracker</h1>
+</div>
+
+    
+            <h3><b>Welcome to your budget tracker!</b></h3>
+            <p>
+                Here you'll see a breakdown of your budget, this will show you the overall 
+                budgets and when you scroll down you can add/delete and edit away. 
+                <br>
+                Have fun and budget away!
+            </p>
+    
+        <div class="jumbotron" id="overall-stats">
+            <div class="container"data-step="2" data-intro="this is the simplified breakdown - here you'll see what you spent and what's left" data-position='right' data-scrollTo='tooltip'>
+            <div class='tabs'>‣ overall: <span style="color:#27A967">${{this.overall}}</span></div>
+                <div class='tabs'>‣ $ spent: <span style="color:#27A967">${{this.totalExpense}}</span></div>
+                <div class='tabs'>‣ change: <span style="color:red">${{this.left}}</span></div>
+            </div>
+        </div>
+ 
+
+
+
+
+
+
+
+
+<!------------------------------------------------------>
+
+<div class ='jumbotron' id="breakdown">
+    <h1 style="font-size: 55px;">break it down : budgets</h3>
+
+  
+<div class="container"  data-step="3" data-intro="Here's your budget breakdown"  data-position='left'>
+    <div class="row">
+        <!--<div><a id='edit' href='/dashboard/edit'>Edit your budgets and expenses</a></div>-->
+        <div class="col-md-6">
+            <div class="insideCol">
+            <br>
+
+                <table>
+                    <thead>
+                        <th>category</th>
+                        <th>$ amount</th>
+                        <th>total</th>
+                        <th>what left</th>
+                    </thead>
+                    {{#each users}}
+                    <tbody>
+                    <form method="POST" action="/dashboard/deleteBudgets">                         
+
+                        {{#each budgetList}}
+                        <tr>
+                            <td><input type="checkbox" name="deleteBudgets" value="{{this._id}}">   {{this.type}}</td>
+                            <td>${{{numFixed this.amount}}}</td>
+                            <td><span style="color:green;">${{{numFixed this.totalSpent}}}</span></td> 
+                            <td><span style="color:red; font-weight: bold;">${{{numFixed this.spendingLeft}}}</span></td>
+                        </tr>
+                        {{/each}}
+
+                    </tbody>
+                    {{/each}}
+                </table>
+                <button type="submit" class='button' value="Submit" class='button'>Delete Budgets</button>
+                </form>
+            </div>
+        </div>
+         <div class="col-md-6" data-step="4" data-intro="and here you can add different types of budgets">
+
+            <div class="insideCol">
+
+            <div class="form">
+                <h3>Insert Budgets</h3><br>
+                <span style="color: red">{{this.message}}</span>
+
+                <form name='budgets' method="POST" action="/budgets"> 
+
+                <select name="type">
+                    <option value="groceries">groceries</option>
+                    <option value="take-out">take-out</option>
+                    <option value="restaurants">restaurants</option>
+                    <option value="going out">going out</option>
+                    <option value="rent">rent</option>
+                    <option value="shopping">shopping</option>
+                    <option value="miscellaneous">miscellaneous</option>
+                </select>
+                <input type="text" name="amount" placeholder="Budget Amount"><br><br>
+
+
+                <button type="submit" id="subBtn" class="button">SUBMIT</button>
+                </form>
+            </div> 
+</div>
+</div>
+</div>
+</div>
+
+
+
+<!------------------------------------------------------>
+ 
+<div class ='jumbotron' id="breakdown1">
+    <h1 style="font-size: 55px;">break it down : expenses</h3>
+    <div class="col-md-6"  data-step="6" data-intro="And you guessed it - add and delete the budgets here"  data-position='right'>
+            <div class="insideCol">
+<h3>Expense History</h3><br>
+    <div class="form">
+
+                <form name='budgets' method="POST" action="/filter"> 
+                Filter by budget type:
+                <select name="type">
+                    <option value="No Filter">all types</option>
+                    <option value="groceries">groceries</option>
+                    <option value="take-out">take-out</option>
+                    <option value="restaurants">restaurants</option>
+                    <option value="going out">going out</option>
+                    <option value="rent">rent</option>
+                    <option value="shopping">shopping</option>
+                    <option value="miscellaneous">miscellaneous</option>
+
+                </select>
+
+                <button type="submit"class="button">SUBMIT</button>
+                </form>
+            </div> 
+<br>
+                {{#if this.filterFlag}} 
+
+                    
+                    <table>
+                    <thead>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </thead>
+                    <tbody>
+                        <form method="POST" action="/dashboard/delete">                         
+
+                        {{#each this.filtered}}
+                        <tr> 
+                            <td><input id = "deleteCheckboxes_1" type="checkbox" name="deleteExpenses" value="{{this._id}}">   {{dateFormat this.created "MM/DD/YYYY"}}</td> 
+                            <td>{{this.type}}</td> 
+                            <td>{{this.description}}</td> 
+                            <td>${{{numFixed this.amount}}}</td> 
+
+                        {{/each}}
+                        </tr>
+                    </tbody>
+
+                </table>
+                <button type="submit" class='button' value="Submit" class='button'>Delete Expenses</button>
+                </form>
+
+                {{else}}
+                <table>
+                    <thead>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </thead>
+                    {{#each users}}
+                    <tbody>
+                        <form method="POST" action="/dashboard/delete">                         
+
+                        {{#each expenseList}}
+                        <tr> 
+                            <td><input id = "deleteCheckboxes2" type="checkbox" name="deleteExpenses" value="{{this._id}}">   {{dateFormat this.created "MM/DD/YYYY"}}</td> 
+                            <td>{{this.type}}</td> 
+                            <td>{{this.description}}</td> 
+                            <td>${{{numFixed this.amount}}}</td> 
+
+                        {{/each}}
+                        </tr>
+                    </tbody>
+                    {{/each}}
+
+                </table>
+                <button type="submit" class='button' value="Submit" class='button'>Delete Expenses</button>
+                </form>
+
+
+
+
+                {{/if}}
+
+        </div>
+
+</div>
+    </div>
+</div>
+</div>
+
+
+
+<div class="container"  data-step="5" data-intro="Check out your expenses here"  data-position='left'>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="insideCol">
+
+            <div class="form">
+                <h3>Add an Expense</h3><br>
+                <span style="color: red">{{this.noMatch}}</span>
+                <span style="color: red">{{this.message2}}</span>
+                <form method="POST" action="/expenses"> 
+                <select name="type">
+                    <option value="groceries">groceries</option>
+                    <option value="take-out">take-out</option>
+                    <option value="restaurants">restaurants</option>
+                    <option value="going out">going out</option>
+                    <option value="rent">rent</option>
+                    <option value="shopping">shopping</option>
+                    <option value="miscellaneous">miscellaneous</option>
+                </select>
+
+                <input type="text" name="amount" placeholder="Cost" class="amount"> - 
+                <input type="text" name="description" placeholder="Description"><br><br>
+                <button type="submit" class="button">ADD</button>
+                </form>
+            </div> 
+
+        </div>
+        </div>
+  </div>
+</div>
+
+<!-- visualizations -->
+<div class ='jumbotron' id="breakdown"  data-step="7" data-intro="check out different visualizations of your budgets">
+<div id="budgets" class="container">
+    <div class="row">
+       <div class = "jumbotron">
+             <h1 style="font-size: 55px;">visualizations</h1>
+       <p>here you can see your budget come to life</p>
+ <ul class="nav nav-tabs"  data-step="8" data-intro="click through to see other options"  data-position='left'>
+    <li class="active"><a data-toggle="tab" href="#home">budget</a></li>
+    <li><a data-toggle="tab" href="#menu1">expenses</a></li>
+    <li><a data-toggle="tab" href="#menu2">tips</a></li>
+  </ul>
+
+  <div class="tab-content">
+      <!--tab 1 -->
+    <div id="home" class="tab-pane fade in active">
+            <div class="col-md-6">
+            <div id="piechart" style="width: 550px; height: 350px;"></div>
+        </div>
+    </div>
+        <!--tab 2 -->
+    <div id="menu1" class="tab-pane fade">
+      <h3>expenses</h3>
+        <div class="col-md-6">
+            <div> <p>check out the expenses breakdown</p></div>
+            <div id="piechart2" style="width: 550px; height: 350px;"></div>
+        </div>
+    </div>
+     <!--tab 3 -->
+    <div id="menu2" class="tab-pane fade">
+     <br><p><b>1. Be Realistic About Your Budget </b><br>
+If you’ve never made a budget before, you need to start by forecasting how much money you’ll have coming in every month and how much you think you’ll be spending. The more realistic you are about each of these numbers, the more likely you’ll be to stick to your budget.
+ <br>
+<br><b>2. Differentiate Between “Needs” And “Wants” In Your Budget</b><br>
+Particularly if money’s tight, differentiating between “needs” and “wants” can help you stay within budget. Needs come first, and if there’s money left over, you can spend on wants.
+ <br>
+<br><b>3a. Guess Low For Income</b><br>
+In your budget, be conservative, and guess low for income. If your income exceeds the amount you factored into your budget, all the better! But you don’t want to be caught short because you were overly optimistic.
+ <br>
+<br><b>3b. Guess High For Expenses</b><br>
+In addition to guessing low for income, guess high for expenses. This, too, will give you some wiggle room when something unexpected crops up or costs rise.
+ <br>
+<br><b>4. Include A Miscellaneous Category In Your Budget</b><br>
+Take all of your expenses and total them. Then, take 10% of that total and put it into a “miscellaneous” category. This adds even more flexibility to your budget, helping to ensure that if you’ve omitted something from your calculations, you won’t go over budget.</p>
+    </div>
+  </div>
+</div>
+</div>
+    </div>
+
+</div>
+</div> 
+
+<div id="runningTab">
+    <div class="container">
+        <div class='tabs'>by jyo</span></div>
+    </div>
+</div>
+<!---------------------------------------------------------->
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var budgets = {{{json this.budgets}}};
+
+        var expenses = {{{json this.expenses}}};
+
+        var newArray = [];
+        var newArray2 = [];
+        for (var i = 0; i < budgets.length; i++) {
+
+            var tinyArray = [];
+            tinyArray.push(budgets[i].type);
+            tinyArray.push(budgets[i].amount);
+            newArray.push(tinyArray);
+        }
+
+        for (var i = 0; i < budgets.length; i++) {
+
+            var tinyArray2 = [];
+            tinyArray2.push(budgets[i].type);
+            tinyArray2.push(budgets[i].totalSpent);
+            newArray2.push(tinyArray2);
+        }
+        
+        var data = new google.visualization.DataTable();
+        data.addColumn('string','Type');
+        data.addColumn('number', 'Amount');
+        for (var i = 0; i < newArray.length; i++) {
+            data.addRow(newArray[i]);
+        }
+ 
+      
+        var options = {
+          title: 'Budget Amounts',
+          is3D: true,
+          slices: {  1: {offset: 0.2},
+                    4: {offset: 0.3},
+                    7: {offset: 0.4},
+                    10: {offset: 0.5},
+          },
+          backgroundColor: { fill:'transparent' },
+             'legend':'left',
+
+  'is3D':true,
+  'width':900,
+  'height':500,
+  colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6']
+          
+        };
+
+
+        var data2 = new google.visualization.DataTable();
+        data2.addColumn('string','Type');
+        data2.addColumn('number', 'Amount Spent');
+        for (var i = 0; i < newArray2.length; i++) {
+            data2.addRow(newArray2[i]);
+        }
+ 
+      
+        var options2 = {
+          title: 'Expenses by Budget',
+          backgroundColor: { fill:'transparent' },
+          'width':900,
+          'height':500,
+          colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
+          bar: { groupWidth: '75%' },
+        };
+
+    
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        var chart2 = new google.visualization.BarChart(document.getElementById('piechart2'));    
+
+
+
+        chart.draw(data, options);
+        chart2.draw(data2, options2);
+
+      }
+</script> 
+
+
+<!--Bootstrap stuff-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+</body>
+<style>
+    
+</style>

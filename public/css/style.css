@@ -1,0 +1,202 @@
+/* home page */
+#homePage{
+    margin-top: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+#loginInfo{
+    margin: 0 auto; 
+}
+
+/*styling*/
+#topNav{
+    float: right;
+    margin-right: 14px;
+}
+
+body{
+    width: 75%;
+    margin: 0 auto;
+}
+
+h1{
+    font-family: 'Righteous', cursive;
+    text-align: center;
+    letter-spacing: 4px;
+    font-size: 70px;
+}
+
+p{
+    width: 60%;
+    margin: 0 auto;
+}
+
+.tabs{
+    font-family: 'Bree Serif', serif;
+    text-align: center;
+    letter-spacing: 4px;
+    font-size: 16px;
+    padding: 10px;
+}
+
+p, select, option{
+    
+    font-family: 'Karla', serif;
+    text-align: center;
+    letter-spacing: 3px;
+    word-spacing: 3px;
+    font-size: 18px;
+}
+
+#explain{
+    font-family: 'Bree Serif', serif;
+    text-align: center;
+    letter-spacing: 3px;
+    word-spacing: 3px;
+    font-size: 15px;
+}
+
+label{
+    margin: 0 auto;
+    font-family: 'Karla', sans-serif;
+    letter-spacing: 3px;
+    font-size: 20px;
+    display: block;
+    text-align: center;
+    line-height: 150%;
+}
+
+
+h3{
+    font-family: 'Karla', sans-serif;
+    letter-spacing: 3px;
+    font-size: 20px;
+    display: block;
+    text-align: center;
+    bottom: 0;  
+}
+
+a{
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+}
+
+form label {
+    display: block; 
+    width: 100%;
+}
+
+/*
+.inline-block {
+  border: 7px solid red;
+}*/
+
+.inline-block .input-w login{
+  display: block; 
+  width: 70%;
+}
+
+.inline-block .label, .inline-block input login{
+  /* float: none; you may need this to overide previous float rules */
+  display: inline-block;
+  vertical-align: middle;
+}
+
+form {
+  padding: .3rem;
+  text-align: center;
+  font-family: 'Karla', sans-serif;
+  font-size: 16px;
+}
+.input-w {
+  margin-bottom: .3rem;
+}
+.input-w .label {
+  min-width: 120px;
+}
+.input-w input {
+  min-width: 200x;
+  font-size: 16px;
+  padding: .2rem;
+}
+
+button[type=submit], input[type=text], input[type=submit], .login, #tour, #logoutBtn {
+    padding:15px 25px;
+    background:#ccc; 
+    border:1 solid;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 150px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-family: 'Karla', sans-serif;
+    font-size: 17px;
+    text-align: center;
+     }
+
+.container{
+    margin: 100px;
+}
+
+table{
+    display: block; 
+    margin: auto;
+}
+
+th {
+    font-family: 'Karla', sans-serif;
+    font-size:14px;
+    letter-spacing: 3px;
+    border-bottom: 1px solid #ddd;
+    padding: 20px;
+    
+    
+    
+}
+
+td{
+    font-family: 'Karla', sans-serif;
+    font-size:14px;
+    letter-spacing: 3px;
+    border-bottom: 1px solid #ddd;
+    padding: 16px;
+    
+    
+}
+
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+.login{
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+
+.log-out{
+    float: right;
+    color: olivedrab;
+}
+
+table {
+    border-radius: 5px;
+    width: 50%;
+    margin: 0px auto;
+    float: none;
+}
+
+#overall-stats{
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin: 0 auto; 
+}
+
+#breakdown{
+    padding-top: 0px;
+    margin-top: 0px;
+}

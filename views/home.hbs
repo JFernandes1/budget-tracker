@@ -1,0 +1,43 @@
+<body>
+<!--
+<div id="topNav">
+    <div class="container">
+        <div class='tabs'><a href='/register'>Register </a></div>
+    </div>
+</div>
+-->
+<div class="jumbotron" id = "homePage">
+	<div class="container" id = "loginInfo" style="margin: 0 auto;">
+		<h1>budget tracker</h1>
+		<p>An expense tracker web application for college students</p>
+		<br>
+
+		{{this.message}}
+		<form action="/login" method="post">
+		    <div>
+		        <label>Username:</label>
+		        <input class='login' type="text" name="username"/>
+		    </div>
+		    <div>
+				<br>
+		        <label>Password: </label>
+		        <input class='login' type="password" name="password"/>
+		    </div>
+		    <div>
+				<br>
+		        <input class='submit' id = "loginBtn" type="submit" value="Log In"/>
+		    </div>
+		</form>	
+	</div>
+</div>
+
+<div >
+			  <P>Not a user yet?</P>
+        <div class='tabs'><a href='/register'>Register </a></div>
+    </div>
+
+
+<!--Bootstrap stuff-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
